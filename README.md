@@ -2,14 +2,17 @@
 
 ## 📌 Project Overview
 
-This project demonstrates a complete **CI/CD pipeline using Jenkins** for a full-stack application.
+This project demonstrates a complete **end-to-end DevOps workflow** for a full-stack application.
 
-The pipeline:
+It includes:
 
-* Pulls code from GitHub
-* Builds the backend (Spring Boot)
-* Archives the artifact (.jar)
-* Uploads the artifact to AWS S3
+* Frontend (React)
+* Backend (Spring Boot)
+* Database (AWS RDS)
+* CI/CD Pipeline using Jenkins
+* Artifact storage in AWS S3
+
+The pipeline automates building, packaging, and uploading application artifacts to the cloud.
 
 ---
 
@@ -19,12 +22,12 @@ The pipeline:
 * **Backend**: Spring Boot (Java 17)
 * **Database**: MariaDB (AWS RDS)
 * **CI/CD Tool**: Jenkins
-* **Cloud**: AWS (S3, EC2)
+* **Cloud Services**: AWS EC2, AWS S3
 * **Build Tool**: Maven
 
 ---
 
-## ⚙️ Project Structure
+## 📂 Project Structure
 
 ```
 devops-jenkins-s3-project/
@@ -40,15 +43,15 @@ devops-jenkins-s3-project/
 
 ## 🔄 CI/CD Pipeline Flow
 
-1. **Pull Code** from GitHub
-2. **Clean Workspace**
-3. **Build Backend** using Maven
-4. **Archive Artifact (.jar)**
-5. **Upload Artifact to AWS S3**
+1. Pull source code from GitHub
+2. Clean workspace
+3. Build backend using Maven
+4. Archive generated artifact (.jar)
+5. Upload artifact to AWS S3
 
 ---
 
-## 📦 Jenkins Pipeline
+## ⚙️ Jenkins Pipeline
 
 ```groovy
 pipeline {
@@ -101,7 +104,7 @@ pipeline {
 
 ## ☁️ AWS S3 Artifact Storage
 
-Artifacts are uploaded to:
+Artifacts are stored in:
 
 ```
 s3://my-balti-bucket4321/backend/target/
@@ -109,26 +112,40 @@ s3://my-balti-bucket4321/backend/target/
 
 ---
 
-## 🔐 Jenkins Setup
+## 🌐 Application Deployment
 
-### Required Plugins
+### Frontend
 
-* Pipeline: AWS Steps
-* AWS Credentials
-* Credentials Binding
+* Built using React (Vite)
+* Deployed on Apache Web Server
+* Accessible via:
 
-### AWS Credentials
+```
+http://<EC2-PUBLIC-IP>
+```
 
-* Stored securely in Jenkins
-* Used via:
+### Backend
 
-```groovy
-withAWS(credentials: 'creds', region: 'ap-south-1')
+* Spring Boot application
+* Running on EC2 instance
+* Port: `8081`
+
+### Database
+
+* AWS RDS (MariaDB)
+* Connected to backend using JDBC
+
+---
+
+## 🔄 Complete DevOps Workflow
+
+```
+Developer → GitHub → Jenkins → Build → Artifact (.jar) → AWS S3 → Deployment
 ```
 
 ---
 
-## 🛠️ Setup Steps
+## 🛠️ Setup Instructions
 
 ### 1. Install Dependencies
 
@@ -154,7 +171,22 @@ sudo ./aws/install
 
 ---
 
-## 🗄️ Database Setup (MariaDB)
+## 🔐 Jenkins Configuration
+
+### Required Plugins
+
+* Pipeline: AWS Steps
+* AWS Credentials
+* Credentials Binding
+
+### AWS Credentials Setup
+
+* Add AWS credentials in Jenkins
+* Use credential ID: `creds`
+
+---
+
+## 🗄️ Database Setup
 
 ```bash
 sudo apt install mariadb-server -y
@@ -175,36 +207,42 @@ CREATE DATABASE student_db;
   * Database passwords
   * `.env` files
 
-* Use placeholders:
+Use placeholders:
 
-```properties
+```
 spring.datasource.username=YOUR_DB_USERNAME
 spring.datasource.password=YOUR_DB_PASSWORD
 ```
 
 ---
 
+## 📸 Suggested Screenshots (for better impact)
+
+* Jenkins pipeline success
+* S3 bucket with uploaded artifact
+* Running application UI
+
+---
+
 ## 🎯 Key Learnings
 
-* CI/CD pipeline creation using Jenkins
-* Artifact management in Jenkins
-* Secure credential handling
-* AWS S3 integration
+* CI/CD pipeline implementation using Jenkins
+* Artifact management and storage in S3
+* Secure credential handling in Jenkins
 * Debugging real-world DevOps issues
+* Integration of full-stack application with cloud services
 
 ---
 
 ## 🚀 Future Improvements
 
-* Deploy backend from S3 to EC2
+* Deploy backend automatically from S3 to EC2
 * Dockerize application
-* Add Kubernetes deployment
-* Add CI/CD for frontend
+* Kubernetes deployment
+* CI/CD pipeline for frontend
 
 ---
 
 ## 👨‍💻 Author
 
 **Chandan Gadewar**
-
----
